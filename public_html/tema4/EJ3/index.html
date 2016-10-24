@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write("<form name=\"cambiacolor\">");
+            document.write("Selecciona un color para el fondo de página:</br><br>");
+            document.write("<select name=\"color\">");
+            document.write("<option value=\"red\">Rojo</option>");
+            document.write("<option value=\"blue\">Azul</option>");
+            document.write("<option value=\"yellow\">Amarillo</option>");
+            document.write("<option value=\"green\">Verde</option>");
+            document.write("<option value=\"gray\">Gris</option>");
+            document.write("<option value=\"black\">Negro</option>");
+            document.write("</select>");
+            document.write("<input type=\"button\" value=\"Modificar el color\" onclick=\"document.bgColor=document.cambiacolor.color.value\">");
+            document.write("</form>");
+        </script>
+    </body>
+</html>
