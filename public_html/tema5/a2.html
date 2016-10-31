@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>A</title>
+        <meta charset="UTF-8">
+        <style>
+            td{
+                text-align: center;
+            }
+        </style>
+        <script>
+            var c = true;
+            function convertir(){
+                
+                if(c){
+                    var euro = document.getElementById('i1').value;
+                    var libra = euro * 0.90;
+                    document.getElementById('i2').value = libra; 
+                }else{
+                    var libra = document.getElementById('i2').value;
+                    var euro = libra * 1.12;
+                    document.getElementById('i1').value = euro; 
+                }
+
+            }
+            function cambiar(){
+                if(c){
+                    c = false;
+                    document.getElementById('i1').disabled = true;
+                    document.getElementById('i2').disabled = false;
+                    document.getElementById('i1').value = "";
+                    document.getElementById('i2').value = "";
+                }else{
+                    c = true;
+                    document.getElementById('i1').disabled = false;
+                    document.getElementById('i2').disabled = true;
+                    document.getElementById('i1').value = "";
+                    document.getElementById('i2').value = "";
+                }
+                
+            }
+        </script>
+    </head>
+    <body>
+        <center>
+            <table>
+                <tr>
+                    <td>€</label</td>
+                    <td><input type="number" id="i1"></td>
+                </tr>
+                <tr>
+                    <td>$</label</td>
+                    <td><input type="number" id="i2" disabled></td>
+                </tr>
+                    <tr>
+                        <td colspan="2"><input type="button" value="Convertir" onclick="convertir()">  <input type="button" onclick="cambiar()" value="Cambiar"></td>
+                </tr>
+        </center>
+    </body>
+</html>
