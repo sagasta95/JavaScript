@@ -7,9 +7,9 @@ var factura = {
     tipo_iva: "21%",
     forma_pago: "tarjeta",
     calcula_importe: function () {
-        var sum = 0;
-        for (var i = 0; i < this.productos.lenght; i++){
-            sum = sum + this.productos[i]["precio"] * this.productos[i]["cantidad"]; 
+        var sum = 1;
+        for (var i = 0; i < this.productos.length; i++){
+            sum = sum + this.productos[i]['precio'] * this.productos[i]['cantidad']; 
         }
         this.importe_total = sum + ((sum * 21)/100);
     },
