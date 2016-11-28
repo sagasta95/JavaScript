@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <style>
+            div{
+                margin: 10% auto;
+                width: 300px;
+                height: 100px;
+            }
+            input{
+                margin-top: 5%;
+                border: 1px solid #000000;
+            }
+        </style>
+        <script>
+            function f1(param) {
+                param.style.border = "30px solid #2EFE2E";
+            }
+            function f2(param){
+                param.style.border = "1px solid #000000";
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <input type="text" onfocus="f1(this)" onfocusout="f2(this)">
+            <input type="text" onfocus="f1(this)" onfocusout="f2(this)">
+        </div>
+    </body>
+</html>
