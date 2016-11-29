@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Club</title>
+        <meta charset="UTF-8">
+        <style>
+            #c{
+                margin: 2% auto;
+                height: auto;
+                width: 500px;
+            }
+            #mostrar{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto; 
+            }
+            #crear{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto;            
+            }
+            #modificar{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto;   
+            }
+            #borrar{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto;    
+            }
+            #buscar{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto;     
+            }
+        </style>
+        <script src="club.js"></script>
+        <script src="socio.js"></script>
+        <script>
+            var c1 = new Club();
+
+            function alta() {
+
+                var id = c1.getSocios().length;
+                var dni = document.getElementById('dni').value;
+                var nombre = document.getElementById('nombre').value;
+                var apellidos = document.getElementById('apellidos').value;
+                var fecha = document.getElementById('fecha').value;
+                var localidad = document.getElementById('localidad').value;
+                var s1 = new Socio(id, dni, nombre, apellidos, fecha, localidad);
+                c1.darAlta(s1);
+            }
+
+            function mostrar() {
+                listar(c1.getSocios());
+            }
+
+            function modificar() {
+                c1.buscarSocio(document.getElementById('b').value).setLocalidad(document.getElementById('newlocalidad').value);
+            }
+
+            function borrar() {
+                if (document.getElementById('bo').value == 1)
+                    c1.darBajaDni(document.getElementById('socio1').value);
+                else
+                    c1.darBajaNs(document.getElementById('socio1').value);
+            }
+            function buscar() {
+                switch (document.getElementById('bu').value) {
+                    case "1":
+                        var res = c1.buscarSocioDni(document.getElementById('socio2').value);
+                        listar(res);
+                        break;
+                    case "2":
+                        var res = c1.buscarSocioNombreApellidos(document.getElementById('socio2').value);
+                        listar(res);
+                        break;
+                    case "3":
+                        var res = c1.buscarSociosCategoria(document.getElementById('socio2').value);
+                        listar(res);
+                        break;
+                    case "4":
+                        var res = c1.buscarSociosLocalidad(document.getElementById('socio2').value);
+                        listar(res);
+                        break;
+                }
+            }
+
+            function listar(res) {
+                var x = window.open("", "b", "width = 600, height = 300");
+                x.document.write("<table>");
+                x.document.write("<tr><td>ID</td><td>DNI</td><td>Nombre</td><td>Apellidos</td><td>Nacimiento</td><td>Localidad</td><td>Categoria</td></tr>");
+                for (var i = 0; i < res.length; i++) {
+                    x.document.write("<tr><td>" + res[i].numSocio + "</td><td>" + res[i].dni + "</td><td>" + res[i].nombre + "</td><td>" + res[i].apellidos + "</td><td>" + res[i].fecNacimiento + "</td><td>" + res[i].localidad + "</td><td>" + res[i].getCat() + "</td></tr>");
+                }
+                x.document.write("</table>");
+            }
+        </script>
+    </head>
+    <body>
+        <div id="c">
+            <div id="crear">
+                <table>
+                    <tr><td>DNI:</td><td><input id="dni" type="text"></td></tr>
+                    <tr><td>Nombre:</td><td><input id="nombre" type="text"></td></tr>
+                    <tr><td>Apellidos:</td><td><input id="apellidos" type="text"></td></tr>
+                    <tr><td>Nacimiento:</td><td><input id="fecha" type="date"></td></tr>
+                    <tr><td>Localidad:</td><td><input id="localidad" type="text"></td></tr>
+                    <tr><td colspan="2"><button onclick="alta()">Crear Socio</button></td></tr>
+                </table>
+            </div>
+            <br>
+            <div id="modificar">
+                <table>
+                    <tr><td>Nº Socio:</td><td><input id="socio" type="text"></td></tr>
+                    <tr><td>Nueva Localidad:</td><td><input id="newlocalidad" type="text"></td></tr>
+                    <tr><td><button onclick="modificar()">Modificar</button></td></tr>
+                </table>
+            </div>
+            <br>
+            <div id="borrar">
+                <table>
+                    <tr><td>Tipo de Borrado:</td>
+                        <td>
+                            <select id="bo">
+                                <option  value="1" selected>Borrar por DNI</option>
+                                <option  value="2" >Borrar por Nº</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td>Socio:</td><td><input id="socio1" type="text"></td></tr>
+                    <tr><td><button onclick="borrar()">Eliminar Socio</button></td></tr>
+                </table>
+            </div>
+            <br>
+            <div id="buscar">
+                <table>
+                    <tr><td>Tipo de Busqueda:</td>
+                        <td>
+                            <select id="bu">
+                                <option  value="1" selected>Buscar por DNI</option>
+                                <option  value="2" >Buscar por Nombre y Apellidos</option>
+                                <option  value="3" >Buscar por Categoria</option>
+                                <option  value="4" >Buscar por Localidad</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td>Socio:</td><td><input id="socio2" type="text"></td></tr>
+                    <tr><td><button onclick="buscar()">Buscar Socio</button></td></tr>
+                </table>
+            </div>
+            <br>
+            <div id="mostrar">
+                <button onclick="mostrar()">Mostrar Socios</button>
+            </div>
+        </div>
+    </body>
+</html>
