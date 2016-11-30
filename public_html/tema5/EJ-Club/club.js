@@ -15,7 +15,7 @@ function Club() {
 
     this.darBajaDni = function (dni) {
         for (var i = 0; i < this.socios.length; i++) {
-            if (this.socios[i].dni === dni)
+            if (this.socios[i].dni == dni)
                 this.socios.splice(i, 1);
         }
     };
@@ -40,10 +40,10 @@ function Club() {
         return aux;
     };
 
-    this.buscarSocioNombreApellidos = function (nombre, apellidos) {
+    this.buscarSocioNombreApellidos = function (nombreyapellidos) {
         var aux = new Array();
         for (var i = 0; i < this.socios.length; i++) {
-            if (this.socios[i].nombre === nombre && this.socios[i].apellidos === apellidos)
+            if (this.socios[i].nombre + " " + this.socios[i].apellidos === nombreyapellidos)
                 aux.push(this.socios[i]);
         }
         return aux;
@@ -52,7 +52,7 @@ function Club() {
     this.buscarSociosCategoria = function (cat) {
         var aux = new Array();
         for (var i = 0; i < this.socios.length; i++) {
-            if (this.socios[i].getCat == cat)
+            if (this.socios[i].getCat() === cat)
                 aux.push(this.socios[i]);
         }
         return aux;

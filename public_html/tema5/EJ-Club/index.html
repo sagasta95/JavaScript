@@ -49,10 +49,14 @@ and open the template in the editor.
         <script src="socio.js"></script>
         <script>
             var c1 = new Club();
+            var s2 = new Socio(0, 1, "aitor", "sagasta", "5/7/1995", "ezcaray");
+            c1.darAlta(s2);
+            var s3 = new Socio(1, 2, "angel", "pell", "5/7/1990", "logroño");
+            c1.darAlta(s3);
+
 
             function alta() {
-
-                var id = c1.getSocios().length;
+                var id = c1.getSocios()[c1.getSocios().length - 1].numSocio + 1;
                 var dni = document.getElementById('dni').value;
                 var nombre = document.getElementById('nombre').value;
                 var apellidos = document.getElementById('apellidos').value;
@@ -76,6 +80,7 @@ and open the template in the editor.
                 else
                     c1.darBajaNs(document.getElementById('socio1').value);
             }
+
             function buscar() {
                 switch (document.getElementById('bu').value) {
                     case "1":
