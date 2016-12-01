@@ -5,4 +5,4 @@ var res = 0;
 for (var i = 0; i <= exp; i++){
     res = res * base
 }
-document.write(base + " ^ " + exp + " = " + )
+document.write(base + " ^ " + exp + " = ");

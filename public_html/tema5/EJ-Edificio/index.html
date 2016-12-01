@@ -1,11 +1,150 @@
 <!DOCTYPE html>
 <html>
     <head> 
-		<title>Ejercicio Edificio</title>
+        <title>Ejercicio Edificio</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">		
-        <script src="edificio.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+        <style>
+            #c{
+                margin: 2% auto;
+                height: auto;
+                width: 500px;
+            }
+            #crear{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto; 
+            }
+            #prop{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto;            
+            }
+            #plantaspuertas{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto;            
+            }
+            #mod{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto;            
+            }
+            #mostrar{
+                padding: 10px;
+                border: 1px solid black;
+                width: 400px;
+                height: auto;            
+            }
+        </style>
+        <script src="Ciudad.js"></script>
+        <script src="Edificio.js"></script>
+        <script src="Planta.js"></script>
+        <script src="Puerta.js"></script>
+        <script>
+            var logroño = new Ciudad();
+
+            function alta() {
+                var calle = document.getElementById('calle').value;
+                var numero = document.getElementById('num').value;
+                var cod = document.getElementById('cp').value;
+                logroño.getEdificios().push(new Edificio(calle, numero, cod));
+                alert("Nuevo Edificio (Calle: " + calle + ", Nº: " + numero + ", CP: " + cod + ").");
+            }
+
+            function prop() {
+                var propietario = document.getElementById('propietario').value;
+                var edificio = document.getElementById('edificio').value;
+                var planta = document.getElementById('planta').value;
+                var puerta = document.getElementById('puerta').value;
+                logroño.getEdificios()[edificio].agregarPropietario(planta, puerta, propietario);
+                alert(propietario + " es ahora dueño de la puerta " + puerta + ", en la planta: " + planta + ", del edificio " + edificio + ".");
+            }
+
+            function agregar() {
+                var edificio = document.getElementById('e').value;
+                var n_plantas = document.getElementById('plantas').value;
+                var n_puertas = document.getElementById('puertas').value;
+                logroño.getEdificios()[edificio].agregarPlantasYPuertas(n_plantas, n_puertas);
+            }
+
+            function modificar() {
+                var edificio = document.getElementById('edificio1').value;
+                var calle = document.getElementById('calle1').value;
+                var numero = document.getElementById('num1').value;
+                var cp = document.getElementById('cp1').value;
+                logroño.getEdificios()[edificio].setCalle(calle);
+                logroño.getEdificios()[edificio].setNumero(numero);
+                logroño.getEdificios()[edificio].setCodPostal(cp);
+            }
+
+            function mostrar() {
+                var x = window.open("", "b", "width = 600, height = 300");
+                for (var i = 0; i < logroño.getEdificios().length; i++) {
+                    x.document.write("<b>Edificio " + i + "</b><hr>");
+                    x.document.write("Calle: " + logroño.getEdificios()[i].getCalle());
+                    x.document.write("<br>Numero: " + logroño.getEdificios()[i].getNumero());
+                    x.document.write("<br>CP: " + logroño.getEdificios()[i].getCodPostal() + "<br>");
+                    for (var i2 = 0; i2 < logroño.getEdificios()[i].getPlantas().length; i2++) {
+                        x.document.write("<br>Planta " + i2 + "<br>");
+                        for (var i3 = 0; i3 < logroño.getEdificios()[i].getPlantas()[i2].getPuertas().length; i3++) {
+                            x.document.write("Puerta " + logroño.getEdificios()[i].getPlantas()[i2].getPuertas()[i3].num_puerta + ": " + logroño.getEdificios()[i].getPlantas()[i2].getPuertas()[i3].propietario + "<br>");
+                        }
+                    }
+                    x.document.write("<hr>");
+                }
+            }
+        </script>
     </head>
-    <body>        
+    <body>
+        <h2>Logroño</h2>
+        <hr>
+        <div id="c">
+            <div id="crear">
+                <table>
+                    <tr><td>Calle:</td><td><input id="calle" type="text"></td></tr>
+                    <tr><td>Numero:</td><td><input id="num" type="text"></td></tr>
+                    <tr><td>Codigo Postal:</td><td><input id="cp" type="text"></td></tr>
+                    <tr><td colspan="2"><button onclick="alta()">Crear Edificio</button></td></tr>
+                </table>
+            </div>
+            <br>
+            <div id="mod">
+                <table>
+                    <tr><td>Nº Edificio:</td><td><input id="edificio1" type="text"></td></tr>
+                    <tr><td>Nueva Calle:</td><td><input id="calle1" type="text"></td></tr>
+                    <tr><td>Nuevo Numero:</td><td><input id="num1" type="text"></td></tr>
+                    <tr><td>Nuevo CP:</td><td><input id="cp1" type="text"></td></tr>
+                    <tr><td colspan="2"><button onclick="modificar()">Modificar Edificio</button></td></tr>
+                </table>
+            </div>
+            <br>
+            <div id="prop">
+                <table>
+                    <tr><td>Propietario:</td><td><input id="propietario" type="text"></td></tr>
+                    <tr><td>Nº Edificio:</td><td><input id="edificio" type="text"></td></tr>
+                    <tr><td>Planta:</td><td><input id="planta" type="text"></td></tr>
+                    <tr><td>Puerta:</td><td><input id="puerta" type="text"></td></tr>
+                    <tr><td><button onclick="prop()">Agregar Propietario</button></td></tr>
+                </table>
+            </div>
+            <br>
+            <div id="plantaspuertas">
+                <table>
+                    <tr><td>Nº Edificio:</td><td><input id="e" type="text"></td></tr>
+                    <tr><td>Nº de plantas:</td><td><input id="plantas" type="text"></td></tr>
+                    <tr><td>Nº de puertas:</td><td><input id="puertas" type="text"></td></tr>
+                    <tr><td colspan="2"><button onclick="agregar()">Agregar Plantas y Puertas</button></td></tr>
+                </table>
+            </div>
+            <br>
+            <div id="mostrar">
+                <button onclick="mostrar()">Mostrar Ciudad</button>
+            </div>
+        </div>
     </body>
 </html>
